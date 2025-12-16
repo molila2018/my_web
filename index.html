@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif, "phetsarath ot";
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .card {
+            color: #333;
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card.hidden {
+            opacity: 0;
+            transform: scale(0.8) rotateY(90deg);
+        }
+
+        .card img {
+            width: 100%;
+            max-width: 350px;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card img:hover {
+            transform: scale(1.05);
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #667eea;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        #countdown-timer {
+            display: none;
+            color: #333;
+            opacity: 0;
+            transform: scale(0.5) translateY(150vh);
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: none;
+        }
+
+        #countdown-timer.show {
+            animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        #countdown-timer.slideFromBottom {
+            animation: slideUpBounce 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(150vh) rotate(-10deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1) translateY(-20px) rotate(5deg);
+            }
+            70% {
+                transform: scale(0.95) translateY(10px) rotate(-3deg);
+            }
+            85% {
+                transform: scale(1.05) translateY(-5px) rotate(2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0) rotate(0deg);
+            }
+        }
+
+        @keyframes slideUpBounce {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(150vh);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.1) translateY(-30px);
+            }
+            75% {
+                transform: scale(0.95) translateY(15px);
+            }
+            90% {
+                transform: scale(1.05) translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        #countdown-timer img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #countdown-timer h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        #countdown-timer p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            z-index: 10;
+            position: relative;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #333;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Arial, sans-serif, "phetsarath ot";
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        #fireworks {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            pointer-events: all;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card, #countdown-timer {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .card h2, #countdown-timer h2 {
+                font-size: 1.5rem;
+            }
+
+            .card p, #countdown-timer p {
+                font-size: 1rem;
+            }
+
+            button {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+
+            .card img {
+                height: 300px;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .card {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎊 Happy New Year 2026 🎊</h1>
+    
+    <div id="card" class="card">
+        <img src="/picture/1.jpg" alt="ພາບສຳລັບປີໃໝ່">
+        <h2>ສະບາຍດີປີໃຫມ່ 2026</h2>
+        <p>ຂໍໃຫ້ເຈົ້າມີຄວາມສຸກຫຼາຍໆ ແລະ ພົບແຕ່ສິ່ງດີໆ ໃນປີໃຫມ່ນີ້ 💖</p>
+    </div>
+
+    <div id="countdown-timer">
+        <img src="/picture/end.jpg" alt="ພາບສຳລັບປີໃໝ່">
+        <h2>ສະບາຍດີປີໃຫມ່ 2026</h2>
+        <p>ຂໍໃຫ້ເຈົ້າມີຄວາມສຸກຫຼາຍໆ ແລະ ພົບແຕ່ສິ່ງດີໆ ໃນປີໃຫມ່ນີ້ 💖</p>
+        <p>ຂໍໂທດສຳລັບທຸກຢ່າງທີ່ເຮັດບໍ່ດີ ຫວັງວ່າເຮົາຈະພົບກັນຄັ້ງຫນ້າດ້ວຍຮອຍຍິ້ມທັງສອງ</p>
+        <p>ໜ້າສຸດທ້າຍແລ້ວ</p>
+        <p>ຄວາມຫວັງ 1% ໃນໃຈອ້າຍ ມັນຍັງສຽງດັງສະເໝີ(ຫວັງວ່າເຮົາຈະໃດ້ພໍ້ກັນອີກໃນເວລາທີ່ແມ່ນໃນອານາຄົດ ທີ່ພ້ອມທັງຮ່າງກາຍ ຈິດໃຈ ແລະ ສະຖານະ)</p>
+        <p>ຂອບໃຈເດີທີ່ເຮັດໃຫ້ມີຄວາມສຸກທີ່ຜ່ານມາ ແລະ ສອນໃຫ້ເປັນຜູ້ໃຫຍ່ຂຶ້ນ ບໍ່ມີອີໂກ້ ສອນໃຫ້ນິ້ງຂຶ້ນຫຼາຍກ່ວາແຕ່ກ່່ອນ ສອນໃຫ້ຮູ້ວ່າການກະທຳອັນໃດຄວນບໍ່ຄວນ </p>
+        <p>ມີຄວາມສຸກທຸກຄັ້ງທີ່ໃດ້ເວົ້ານຳເຈົ້າ (ຂອບໃຈເດີ)</p>
+    </div>
+
+    <canvas id="fireworks"></canvas>
+
+    <div class="button-container">
+        <button onclick="previousCard()" id="btn1"><span>⬅️ ຍ້ອນກັບ</span></button>
+        <button onclick="nextCard()" id="btn2"><span>ຖັດໄປ ➡️</span></button>
+    </div>
+
+    <script>
+        const cards = [
+            { 
+                title: "ສະບາຍດີປີໃຫມ່ 2026 🎉", 
+                message: "ຂໍໃຫ້ທຸກຄວາມຝັນຂອງເຈົ້າເປັນຈິງ ✨",
+                img: "/picture/1.jpg"
+            },
+            { 
+                title: "HNY 2026!", 
+                message: "ປີນີ້ຂໍໃຫ້ເຈົ້າສຸຂະພາບແຂງແຮງ ແລະ ມີແຕ່ຮອຍຍິ້ມ 😊",
+                img: "/picture/download (7).jpg"
+            },
+            { 
+                title: "ສະບາຍດີປີໃຫມ່ 2026 🎉", 
+                message: "ຂໍໃຫ້ເຈົ້າພົບເຈີແຕ່ສິ່ງດີໆ ສິ່ງບໍ່ດີຫາຍໄປ",
+                img: "/picture/33.jpg"
+            },
+            { 
+                title: "ສະບາຍດີປີໃຫມ່ 2026 🎉", 
+                message: "ຂໍໃຫ້ເຈົ້າສິວລົງໄວໆ ແລະ ບໍ່ຂຶ້ນຫຼາຍ(ມັກສຸດລະຮູບຊູນິ້ວກາງນິ 555)",
+                img: "/picture/download (3).jpg"
+            },
+            { 
+                title: "ສະບາຍດີປີໃຫມ່ 2026 🎉", 
+                message: "ຢ່າກິນເຜັດຫຼາຍເດີ",
+                img: "/picture/download (5).jpg"
+            },
+            { 
+                title: "ສະບາຍດີປີໃຫມ່ 2026 🎉", 
+                message: "ຂໍໃຫ້ພົບພໍ້ກັບສິ່ງທີ່ເຈົ້າຈ້ອງການ ❤",
+                img: "/picture/IMG-20241226-WA0002.jpg"
+            },
+            { 
+                title: "ສະບາຍດີປີໃຫມ່ 2026 🎉", 
+                message: "ຢາກໃຫ້ເຈົ້າຍິ້ມຫຼາຍໆ ຍິ້ມໆ (ເຈົ້າຍິ້ມສວຍ)",
+                img: "/picture/7.png"
+            },
+             { 
+                title: "ສະບາຍດີປີໃຫມ່ 2026 🎉", 
+                message: "ຢາກໃຫ້ເຈົ້າຍິ້ມຫຼາຍໆ ຍິ້ມໆ (ເຈົ້າເໝາະກັບຮອຍຍິ້ມທີ່ສຸດ)",
+                img: "/picture/download (1).jpg"
+            },
+            { 
+                title: "ຂໍໃຫ້ເຈົ້າສົດໃສ ເພາະເຈົ້າເໝາະກັບຮອຍຍິ້ມທີ່ສຸດ!", 
+                message: "🎇 ກຽມພ້ອມສຳລັບເລີ່ມຕົ້ນປີໃໝ່ 2026 🎇",
+                img: "https://via.placeholder.com/400x300?text=Countdown+2026"
+            }
+        ];
+
+        let currentCardIndex = 0;
+
+        function renderCard() {
+            const cardElement = document.getElementById('card');
+            const card = cards[currentCardIndex];
+            
+            cardElement.innerHTML = `
+                <img src="${card.img}" alt="ພາບສຳລັບ ${card.title}">
+                <h2>${card.title}</h2>
+                <p>${card.message}</p>
+            `;
+        }
+
+        function nextCard() {
+            const cardElement = document.getElementById('card');
+            const countdownTimer = document.getElementById('countdown-timer');
+            const btn1 = document.getElementById('btn1');
+            const btn2 = document.getElementById('btn2');
+            
+            cardElement.classList.add('hidden');
+
+            setTimeout(() => {
+                if (currentCardIndex < cards.length - 1) {
+                    currentCardIndex++;
+                }
+                if (currentCardIndex === cards.length - 1) {
+                    countdownTimer.style.display = 'block';
+                    cardElement.style.display = 'none';
+                    btn1.style.display = 'none';
+                    btn2.style.display = 'none';
+                    
+                    // แสดงการ์ดแบบซ่อนไว้ก่อน (จะเด้งขึ้นหลังพลุหมด)
+                    countdownTimer.style.opacity = '0';
+                    
+                    startFireworks();
+                } else {
+                    renderCard();
+                    cardElement.classList.remove('hidden');
+                }
+            }, 600);
+        }
+
+        function previousCard() {
+            const cardElement = document.getElementById('card');
+            cardElement.classList.add('hidden');
+
+            setTimeout(() => {
+                if (currentCardIndex > 0) {
+                    currentCardIndex--;
+                }
+                renderCard();
+                cardElement.classList.remove('hidden');
+            }, 600);
+        }
+
+        function startFireworks() {
+            const fireworksCanvas = document.getElementById('fireworks');
+            fireworksCanvas.style.display = 'block';
+
+            const ctx = fireworksCanvas.getContext('2d');
+            fireworksCanvas.width = window.innerWidth;
+            fireworksCanvas.height = window.innerHeight;
+
+            if (!ctx) {
+                console.error('Canvas context not found.');
+                return;
+            }
+
+            const particles = [];
+            let fireworkCount = 0;
+            const maxFireworks = 15; // จำนวนพลุทั้งหมด
+
+            function createParticle(x, y) {
+                const particleCount = Math.random() * 30 + 50; // ลดลงเหลือ 50-80 อนุภาค
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x,
+                        y,
+                        angle: Math.random() * 2 * Math.PI,
+                        speed: Math.random() * 5 + 2,
+                        life: Math.random() * 50 + 40,
+                        color: `hsl(${Math.random() * 360}, 100%, ${50 + Math.random() * 30}%)`,
+                        size: Math.random() * 3 + 1.5,
+                        gravity: Math.random() * 0.1 + 0.05
+                    });
+                }
+            }
+
+            function updateParticles() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                ctx.fillRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.life--;
+                    if (p.life <= 0) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                    
+                    p.x += Math.cos(p.angle) * p.speed;
+                    p.y += Math.sin(p.angle) * p.speed + p.gravity;
+                    p.speed *= 0.97;
+                    p.gravity += 0.05;
+
+                    // ลดเอฟเฟกต์เงา
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = p.life / 90;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+            }
+
+            function loop() {
+                updateParticles();
+
+                // ลดความถี่การยิงพลุ
+                if (fireworkCount < maxFireworks) {
+                    if (Math.random() < 0.15) {
+                        const x = Math.random() * fireworksCanvas.width;
+                        const y = Math.random() * (fireworksCanvas.height / 2);
+                        createParticle(x, y);
+                        fireworkCount++;
+                    }
+                }
+
+                if (particles.length > 0 || fireworkCount < maxFireworks) {
+                    requestAnimationFrame(loop);
+                } else {
+                    // เมื่อพลุหมดแล้ว ให้การ์ดเด้งขึ้นมา
+                    setTimeout(() => {
+                        fireworksCanvas.style.display = 'none';
+                        const countdownTimer = document.getElementById('countdown-timer');
+                        countdownTimer.classList.remove('show');
+                        countdownTimer.classList.add('slideFromBottom');
+                    }, 500);
+                }
+            }
+
+            loop();
+
+            fireworksCanvas.addEventListener('click', (e) => {
+                createParticle(e.clientX, e.clientY);
+            });
+        }
+
+        renderCard();
+    </script>
+</body>
+</html>
